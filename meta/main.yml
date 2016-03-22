@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Denis Khabarov
+  description: Ansible role for install Filebeat on debian-like systems
+  license: GPLv3
+  min_ansible_version: 1.4
+  platforms:
+  - name: Ubuntu
+    versions:
+     - trusty
+  categories:
+  - development
+  - monitoring
+  - logging
+dependencies: []

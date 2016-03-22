@@ -1,0 +1,31 @@
+---
+- name: add apt key
+  apt_key:
+    url: https://packages.elasticsearch.org/GPG-KEY-elasticsearch
+  when: ansible_os_family == "Debian"
+
+- name: add repository
+  apt_repository:
+    repo: "deb https://packages.elastic.co/beats/apt stable main"
+  when: ansible_os_family == "Debian"
+
+- name: install packages
+  apt:
+    pkg: filebeat
+    state: "{{ install_filebeat }}"
+  when: ansible_os_family == "Debian"
+
+- name: setup autostart
+  service:
+    name: filebeat
+    enabled: yes 
+
+- name: install filebeat configuration file
+  template:
+   src: filebeat.yml.j2
+   dest: /etc/filebeat/filebeat.yml
+   owner: root
+   group: root
+   mode: 0644
+  notify:
+    - service filebeat restart

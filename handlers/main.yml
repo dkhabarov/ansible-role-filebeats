@@ -1,0 +1,6 @@
+---
+
+- name: service filebeat restart
+  service:
+   name: filebeat
+   state: restarted
